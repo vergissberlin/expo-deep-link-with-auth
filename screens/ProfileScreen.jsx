@@ -8,7 +8,7 @@ const ProfileScreen = ({ navigation, route }) => {
         <View style={styles.container}>
             <Text style={styles.title}>ProfileScreen</Text>
             <Text
-                style={styles.debug}>AuthToken: {route.params.authToken ? route.params.authToken : 'No token set'}</Text>
+                style={styles.debug}>AuthToken: {route.params?.authToken ? route.params?.authToken : 'No token set'}</Text>
         </View>
     )
 }
