@@ -29,6 +29,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "This is a simple example of a web browser based login and deep linking.\nThis is made to prove the concept of deep linking with different versions of iOS and Android.",
+    "githubUrl": "https://github.com/vergissberlin/expo-deep-link-with-auth"
   }
 }
