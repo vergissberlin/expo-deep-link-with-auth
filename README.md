@@ -1,7 +1,9 @@
 # Webbrowser based login and deep linking
 
-This is a simple example of a web browser based login and deep linking. 
+This is a simple example of a web browser based login and deep linking.
 This is made to prove the concept of deep linking with different versions of iOS and Android.
+
+![Android preview](documentation/android.png)
 
 ## Testing
 
@@ -17,6 +19,7 @@ npx uri-scheme open exp://192.168.2.13:19000/--/settings -a -i
 ```
 
 Change the path to switch between screens:
+
 ```shell
 npx uri-scheme open exp://192.168.2.13:19000/--/home -a -i
 ```

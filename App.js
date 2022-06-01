@@ -72,12 +72,12 @@ export default function App() {
     return (
         <NavigationContainer linking={linking}>
             <StatusBar style="auto"/>
-          <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
-            <Tab.Screen name="Profile" component={ProfileScreen} />
-            <Tab.Screen name="Login" component={LoginScreen} />
-          </Tab.Navigator>
+            <Tab.Navigator>
+                <Tab.Screen name="Home" component={HomeScreen}/>
+                <Tab.Screen name="Settings" component={SettingsScreen}/>
+                <Tab.Screen name="Profile" component={ProfileScreen}/>
+                <Tab.Screen name="Login" component={LoginScreen}/>
+            </Tab.Navigator>
             <Text style={styles.debug}>Initial url is: {initialUrl ? initialUrl : 'not set'}</Text>
             <Text style={styles.debug}>{data ? JSON.stringify(data) : 'No data'}</Text>
         </NavigationContainer>

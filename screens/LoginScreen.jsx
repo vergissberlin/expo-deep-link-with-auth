@@ -56,7 +56,7 @@ const LoginScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Text>LoginScreen</Text>
+            <Text style={styles.title}>LoginScreen</Text>
             <Button title={'Login'} onPress={_login}/>
             <Text style={{ paddingHorizontal: 42 }}>{result ? JSON.stringify(result) : 'no data'}</Text>
             <Text style={{ paddingHorizontal: 42 }}>{linkingUrl}</Text>
@@ -70,6 +70,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    title: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
     },
 })
 
