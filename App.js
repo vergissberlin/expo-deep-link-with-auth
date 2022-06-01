@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet, Switch, Text, View } from 'react-native'
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import * as Linking from 'expo-linking'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -20,10 +20,11 @@ const Tab = createBottomTabNavigator()
 export default function App() {
 
     // States
-    const [ initialUrl, setInitialUrl ] = useState(null)
     const [ data, setData ] = useState(null)
+    const [ useTabNavigation, setUseTabNavigation ] = useState(true)
+    const toggleSwitch = () => setUseTabNavigation(previousState => !previousState)
 
-
+    // Linking
     const linking = {
         prefixes: [ prefix ],
         config: {
@@ -36,10 +37,9 @@ export default function App() {
         },
     }
 
-
     // Actions
     const _handleOpenURL = (event) => {
-        setData(Linking.parse(event.url))
+        console.log(Linking.parse(event.url))
     }
 
     // Hooks
@@ -63,7 +63,6 @@ export default function App() {
         Linking.getInitialURL().then((url) => {
             if (url) {
                 console.info('Initial url is: ' + url)
-                setInitialUrl(url)
             }
         })
     }, [])
@@ -72,35 +71,36 @@ export default function App() {
     return (
         <NavigationContainer linking={linking}>
             <StatusBar style="auto"/>
-            <Tab.Navigator>
-                <Tab.Screen name="Home" component={HomeScreen}/>
-                <Tab.Screen name="Settings" component={SettingsScreen}/>
-                <Tab.Screen name="Profile" component={ProfileScreen}/>
-                <Tab.Screen name="Login" component={LoginScreen}/>
-            </Tab.Navigator>
-            <Text style={styles.debug}>Initial url is: {initialUrl ? initialUrl : 'not set'}</Text>
-            <Text style={styles.debug}>{data ? JSON.stringify(data) : 'No data'}</Text>
+            {useTabNavigation ? (
+                <Tab.Navigator>
+                    <Tab.Screen name="Home" component={HomeScreen}/>
+                    <Tab.Screen name="Settings" component={SettingsScreen}/>
+                    <Tab.Screen name="Profile" component={ProfileScreen}/>
+                    <Tab.Screen name="Login" component={LoginScreen}/>
+                </Tab.Navigator>
+            ) : (
+                <Stack.Navigator>
+                    <Stack.Screen name="Home" component={HomeScreen}/>
+                    <Stack.Screen name="Settings" component={SettingsScreen}/>
+                    <Stack.Screen name="Profile" component={ProfileScreen}/>
+                    <Stack.Screen name="Login" component={LoginScreen}/>
+                </Stack.Navigator>
+            )}
+
+            <View style={styles.debug}>
+            <Text style={{marginBottom: 12}}>Switch navigation type: {useTabNavigation? 'TabNavigator': 'StackNavigator'}</Text>
+                <Switch
+                    trackColor={{ false: '#767577', true: '#81b0ff' }}
+                    thumbColor={useTabNavigation ? '#f5dd4b' : '#f4f3f4'}
+                    ios_backgroundColor="#3e3e3e"
+                    onValueChange={toggleSwitch}
+                    value={useTabNavigation}
+                />
+            </View>
         </NavigationContainer>
     )
 }
 
-/*
-         <Stack.Navigator>
-                <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: true }}/>
-                <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: true }}/>
-                <Stack.Screen name="Settings" component={SettingsScreen} options={{ headerShown: true }}/>
-                <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: true }}/>
-            </Stack.Navigator>
- */
-
-/*
-  <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-      <Tab.Screen name="Login" component={LoginScreen} />
-    </Tab.Navigator>
- */
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -110,5 +110,8 @@ const styles = StyleSheet.create({
     },
     debug: {
         padding: 24,
-    },
+        paddingTop: 12,
+        alignItems: 'center',
+        borderTopColor: '#ccc',
+        borderTopWidth: 1,    },
 })

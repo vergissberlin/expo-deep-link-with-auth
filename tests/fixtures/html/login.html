@@ -19,48 +19,46 @@
     <h1>Login and deep linking</h1>
     <script>
         document.addEventListener('DOMContentLoaded', function (event) {
-            let links = document.querySelectorAll('a'),
-                    baseUri = 'exp://q7-esp.vergissberlin.react-native-deep-linking.exp.direct:80/'
-            //baseUri = 'exp://192.168.10.16:19000/'
+            let param = (new URL(document.location)).searchParams,
+                links = document.querySelectorAll('a'),
+                linkingUrl
 
-            /*
-            let param = (new URL(document.location)).searchParams;
-            baseUri = decodeURIComponent(param.get('linkingUri')) || baseUri;
-            document.getElementById('result').innerText = baseUri;
-
-            // Take the uri from the params
-            let qs = decodeURIComponent(document.location.search)
-            if (qs) {
-                baseUri = qs.split('?linkingUri=')[1]
+            // URL param linkingUri
+            if(param.get('linkingUri') !== null) {
+                linkingUrl = decodeURIComponent(param.get('linkingUri'))
+            } else {
+                linkingUrl = 'exp://q7-esp.vergissberlin.react-native-deep-linking.exp.direct:80/'
             }
-            */
+            document.getElementById('resultBaseUri').innerText = linkingUrl
+            document.getElementById('resultCurrentUrl').innerText = window.location.href
 
             // Update the link URLs
-            for (var i = 0; i < links.length; ++i) {
-                links[i].href = links[i].href.replace('exp://REPLACE_ME/', baseUri)
+            for (let i = 0; i < links.length; ++i) {
+                let token =  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+                links[i].href = links[i].href.replace('exp://REPLACE_URL/', linkingUrl).replace('REPLACE_TOKEN', token)
+                document.getElementById('token').innerText = token
                 console.log(links[i].href)
             }
-
-            // URL params output
-            let param = (new URL(document.location)).searchParams
-            document.getElementById('result').innerText = decodeURIComponent(param.get('linkingUri'))
-
         })
     </script>
     <section class="section">
         <h2 class="mt-4">Auth redirect example</h2>
         <ul class="list-group">
             <li class="list-group-item">
-                <a href="exp://REPLACE_ME/--/profile?authToken=6b7f432aa1cc001fa2e4116d011da8ec1f8d16c51f90231d9ecd6e9851dcb149021716e5417e99d56b24ad98433ac1dd7a0b">
+                <a href="exp://REPLACE_URL/?authToken=REPLACE_TOKEN">
                     Pass back some fake auth token
                 </a>
             </li>
         </ul>
     </section>
 
-    <section class="section">
-        <h3 class="mt-5 text-muted">URL params</h3>
-        <pre><code class="card text-muted p-2" id="result"></code></pre>
+    <section class="section text-muted ">
+        <h3 class="mt-5 h5">Linking url</h3>
+        <pre><code class="card p-2 overflow-auto" id="resultBaseUri"></code></pre>
+        <h3 class="mt-5 h5">Current url</h3>
+        <pre><code class="card p-2 overflow-auto" id="resultCurrentUrl"></code></pre>
+        <h3 class="mt-5 h5">Token</h3>
+        <pre><code class="card p-2 overflow-auto" id="token"></code></pre>
     </section>
 </main>
 </body>

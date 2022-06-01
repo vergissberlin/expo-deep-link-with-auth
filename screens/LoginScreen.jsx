@@ -10,14 +10,13 @@ const LoginScreen = ({ navigation }) => {
 
     // States
     const [ result, setResult ] = useState(null)
-    const [ initialUrl, setInitialUrl ] = useState(null)
-    const [ linkingUrl, setLinkingUrl ] = useState(Linking.createURL('profile'))
+    const [ linkingUrl, setLinkingUrl ] = useState(loginUrl)
 
 
     // Actions
     const _login = async () => {
         try {
-            const result = await WebBrowser.openAuthSessionAsync(loginUrl, linkingUrl)
+            const result = await WebBrowser.openAuthSessionAsync(linkingUrl, Linking.createURL('profile'))
             let redirectData
 
             if (result?.url) {
@@ -44,11 +43,14 @@ const LoginScreen = ({ navigation }) => {
         }
     }
 
+    const _logout = () => {
+        setResult(null)
+    }
+
     useLayoutEffect(() => {
         Linking.getInitialURL().then((url) => {
             if (url) {
-                setInitialUrl(url)
-                // setLinkingUrl(`${loginUrl}?linkingUri=${encodeURI(url)}`)
+                setLinkingUrl(`${loginUrl}?linkingUri=${encodeURI(url)}/--/profile`)
             }
         })
     }, [])
@@ -57,9 +59,10 @@ const LoginScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>LoginScreen</Text>
-            <Button title={'Login'} onPress={_login}/>
-            <Text style={{ paddingHorizontal: 42 }}>{result ? JSON.stringify(result) : 'no data'}</Text>
-            <Text style={{ paddingHorizontal: 42 }}>{linkingUrl}</Text>
+            <Button title={'Login'} onPress={_login} style={styles.btnBlock} />
+            <Button title={'Logout'} onPress={_logout} style={styles.btnBlock} />
+            <Text style={styles.debug}>Result: {result ? JSON.stringify(result) : 'no data'}</Text>
+            <Text style={styles.debug}>LinkingUrl: {linkingUrl}</Text>
         </View>
     )
 }
@@ -67,7 +70,6 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -75,6 +77,15 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         margin: 10,
+    },
+    btnBlock: {
+        margin: 10,
+        width: '100%',
+    },
+    debug: {
+        marginTop: 12,
+        padding: 42,
+        backgroundColor: '#ffffff',
     },
 })
 
