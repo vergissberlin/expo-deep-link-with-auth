@@ -39,6 +39,14 @@ yarn start
 
 Replace the IP with the IP of your expo instance.
 
+### Authentication
+
+1. Go to the login page.
+2. Click on the login button.
+3. Click on "Pass back some fake auth token" to simulate a successful login.
+4. The login should be successful and the user should be redirected to the deep linking page.
+5. On the deep linking page, you can see the fake auth token.
+
 ### Deep linking
 
 With the deep linking feature you can link to a specific screen in your app.
