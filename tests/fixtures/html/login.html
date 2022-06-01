@@ -20,11 +20,11 @@
     <script>
         document.addEventListener('DOMContentLoaded', function (event) {
             let param = (new URL(document.location)).searchParams,
-                links = document.querySelectorAll('a'),
-                linkingUrl
+                    links = document.querySelectorAll('a'),
+                    linkingUrl
 
             // URL param linkingUri
-            if(param.get('linkingUri') !== null) {
+            if (param.get('linkingUri') !== null) {
                 linkingUrl = decodeURIComponent(param.get('linkingUri'))
             } else {
                 linkingUrl = 'exp://q7-esp.vergissberlin.react-native-deep-linking.exp.direct:80/'
@@ -34,7 +34,7 @@
 
             // Update the link URLs
             for (let i = 0; i < links.length; ++i) {
-                let token =  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+                let token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
                 links[i].href = links[i].href.replace('exp://REPLACE_URL/', linkingUrl).replace('REPLACE_TOKEN', token)
                 document.getElementById('token').innerText = token
                 console.log(links[i].href)

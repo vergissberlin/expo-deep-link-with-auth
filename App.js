@@ -88,7 +88,8 @@ export default function App() {
             )}
 
             <View style={styles.debug}>
-            <Text style={{marginBottom: 12}}>Switch navigation type: {useTabNavigation? 'TabNavigator': 'StackNavigator'}</Text>
+                <Text style={{ marginBottom: 12 }}>Switch navigation
+                    type: {useTabNavigation ? 'TabNavigator' : 'StackNavigator'}</Text>
                 <Switch
                     trackColor={{ false: '#767577', true: '#81b0ff' }}
                     thumbColor={useTabNavigation ? '#f5dd4b' : '#f4f3f4'}
@@ -113,5 +114,6 @@ const styles = StyleSheet.create({
         paddingTop: 12,
         alignItems: 'center',
         borderTopColor: '#ccc',
-        borderTopWidth: 1,    },
+        borderTopWidth: 1,
+    },
 })

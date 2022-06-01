@@ -12,7 +12,6 @@ const LoginScreen = ({ navigation }) => {
     const [ result, setResult ] = useState(null)
     const [ linkingUrl, setLinkingUrl ] = useState(loginUrl)
 
-
     // Actions
     const _login = async () => {
         try {
@@ -59,8 +58,8 @@ const LoginScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>LoginScreen</Text>
-            <Button title={'Login'} onPress={_login} style={styles.btnBlock} />
-            <Button title={'Logout'} onPress={_logout} style={styles.btnBlock} />
+            <Button title={'Login'} onPress={_login} style={styles.btnBlock}/>
+            <Button title={'Logout'} onPress={_logout} style={styles.btnBlock}/>
             <Text style={styles.debug}>Result: {result ? JSON.stringify(result) : 'no data'}</Text>
             <Text style={styles.debug}>LinkingUrl: {linkingUrl}</Text>
         </View>
