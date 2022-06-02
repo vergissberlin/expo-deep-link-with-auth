@@ -3,6 +3,18 @@
 This is a simple example of a web browser based login and deep linking.
 This is made to prove the concept of deep linking with different versions of iOS and Android.
 
+## Used technoligies
+
+- [React Native](https://reactnative.dev/)
+- [Expo](https://expo.dev/)
+  - [WebBrowser](https://docs.expo.dev/versions/latest/sdk/webbrowser/)
+  - [Linking](https://docs.expo.dev/guides/linking/)
+- [React Navigation](https://reactnavigation.org/)
+  - [StackNavigator](https://reactnavigation.org/docs/stack-navigator/)
+  - [TabNavigator](https://reactnavigation.org/docs/tab-based-navigation/)
+
+## Preview
+
 ![Android preview](documentation/android.png)
 
 ## Demo
