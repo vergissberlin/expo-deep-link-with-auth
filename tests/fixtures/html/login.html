@@ -18,19 +18,19 @@
 <main class="container mt-5">
     <h1>Login and deep linking</h1>
     <script>
-        document.addEventListener('DOMContentLoaded', function (event) {
+        document.addEventListener('DOMContentLoaded',  () => {
             let param = (new URL(document.location)).searchParams,
                     links = document.querySelectorAll('a'),
                     linkingUrl
 
-            // URL param linkingUri
             if (param.get('linkingUri') !== null) {
                 linkingUrl = decodeURIComponent(param.get('linkingUri'))
             } else {
                 linkingUrl = 'exp://q7-esp.vergissberlin.react-native-deep-linking.exp.direct:80/'
             }
-            document.getElementById('resultBaseUri').innerText = linkingUrl
-            document.getElementById('resultCurrentUrl').innerText = window.location.href
+
+            document.getElementById('baseUrl').value = linkingUrl
+            document.getElementById('currentUrl').value = window.location.href
 
             // Update the link URLs
             for (let i = 0; i < links.length; ++i) {
@@ -53,10 +53,13 @@
     </section>
 
     <section class="section text-muted ">
+
         <h3 class="mt-5 h5">Linking url</h3>
-        <pre><code class="card p-2 overflow-auto" id="resultBaseUri"></code></pre>
+        <input type="text" readonly name="baseUrl" id="baseUrl" class="form-control">
+
         <h3 class="mt-5 h5">Current url</h3>
-        <pre><code class="card p-2 overflow-auto" id="resultCurrentUrl"></code></pre>
+        <input type="text" readonly name="currentUrl" id="currentUrl" class="form-control">
+
         <h3 class="mt-5 h5">Token</h3>
         <pre><code class="card p-2 overflow-auto" id="token"></code></pre>
     </section>
