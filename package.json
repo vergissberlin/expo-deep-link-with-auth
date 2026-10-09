@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
-    "surge": "^0.23.1"
+    "surge": "^0.44.0"
   },
   "private": true
 }
